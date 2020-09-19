@@ -1,1 +1,1 @@
-print("xjs is strong")
+print("xjs is fking retarded")
