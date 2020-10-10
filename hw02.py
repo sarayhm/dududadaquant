@@ -240,7 +240,7 @@ def palindrome(s, k):
     if k == 0:
         if is_pldrm(s):
             return int(s)
-        return -1
+        return "Not possible."
     curr_max = -float("inf")
     values = set("9")
     visited = set()
@@ -266,6 +266,8 @@ def palindrome(s, k):
                         curr_max = check_next
     if curr_max == -1:
         return "Not possible."
+    if curr_max == -float("inf"):
+        return "Not possible."
     return curr_max
 
 print("Testing Palindrome")
@@ -276,6 +278,7 @@ print("Test case 11119111 and 4, expect 91199119.", palindrome('11119111', 4))
 print("Test case 1234666 and 4, expect 9664669.", palindrome("1234666", 4))
 print("Test case 0 and 4, expect 9.", palindrome("0", 4))
 print("Test case 0 and 0, expect 0.", palindrome("0", 0))
+print("Test case 12 and 0, expect NP.", palindrome("12", 0))
 
 
 def reverse_engineer(seq):
