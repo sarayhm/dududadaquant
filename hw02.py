@@ -264,8 +264,6 @@ def palindrome(s, k):
                         continue
                     elif check_next >= curr_max:
                         curr_max = check_next
-    if curr_max == -1:
-        return "Not possible."
     if curr_max == -float("inf"):
         return "Not possible."
     return curr_max
