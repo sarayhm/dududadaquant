@@ -198,11 +198,19 @@ def make_trades(starting_cash, prices, crossovers):
     #             current_value.append(current_value[start_index-1])
     #         start_index += 1
 
-starting_cash = 1000.0
-prices = [2,3,4,5,4,3,2,1,6,1,5,7,8,10,7,9]
-cos = [[5, 2], [8, 1], [10, 2], [11, 1], [15, 2]] # not real crossovers, just to illustrate portfolio value when trading
-values = make_trades(starting_cash, prices, cos)
-print([round(v, 2) for v in values])
+# starting_cash = 1000.0
+# prices = [2,3,4,5,4,3,2,1,6,1,5,7,8,10,7,9]
+# cos = [[5, 2], [8, 1], [10, 2], [11, 1], [15, 2]] # not real crossovers, just to illustrate portfolio value when trading
+# values = make_trades(starting_cash, prices, cos)
+# print([round(v, 2) for v in values])
+
+
+def is_pldrm(s):
+    assert type(s) is str, "Type non-string not supported"
+    for i in range(len(s)):
+        if s[i] != s[::-1][i]:
+            return False
+    return True
 
 def palindrome(s, k):
     """
@@ -227,7 +235,47 @@ def palindrome(s, k):
     '91199119'
     """
     # Your code here.
-    pass
+    # Define helper function that checks if the str is a PLDRM
+    
+    if k == 0:
+        if is_pldrm(s):
+            return int(s)
+        return -1
+    curr_max = -float("inf")
+    values = set("9")
+    visited = set()
+    for i in s:
+        values.add(i)
+
+    # Search through potential palindrome layers
+    for v in values:
+        for j in range(len(s)):
+            temp = s[:j] + v + s[j + 1:]
+            if temp in visited:
+                continue
+            else:
+                visited.add(temp)
+                if is_pldrm(temp):
+                    if int(temp) >= curr_max:
+                        curr_max = max(int(temp), palindrome(temp, k - 1))
+                else:
+                    check_next = palindrome(temp, k - 1)
+                    if type(check_next) is str:
+                        continue
+                    elif check_next >= curr_max:
+                        curr_max = check_next
+    if curr_max == -1:
+        return "Not possible."
+    return curr_max
+
+print("Testing Palindrome")
+print("Test case 1921 and 2, expect 1991.", palindrome('1921', 2))
+print("Test case 1921 and 2, expect 9999.", palindrome('1921', 3))
+print("Test case 11122 and 2, expect NP.", palindrome('11122', 1))
+print("Test case 11119111 and 4, expect 91199119.", palindrome('11119111', 4))
+print("Test case 1234666 and 4, expect 9664669.", palindrome("1234666", 4))
+print("Test case 0 and 4, expect 9.", palindrome("0", 4))
+print("Test case 0 and 0, expect 0.", palindrome("0", 0))
 
 
 def reverse_engineer(seq):
