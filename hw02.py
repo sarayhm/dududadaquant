@@ -279,6 +279,27 @@ print("Test case 0 and 0, expect 0.", palindrome("0", 0))
 print("Test case 12 and 0, expect NP.", palindrome("12", 0))
 
 
+def extract_alphas(seq):
+    alphas = set()
+    for combo in seq:
+        for alpha in combo:
+            alphas.add(alpha)
+    out = {}
+    for alpha in alphas:
+        out[alpha] = 1
+    return out
+
+def get_next_alphas(alphas, order):
+    # TRY REVERSING KEY VALUE PAIR TMR MORNING
+    curr_max = max(alphas.values())
+    alphas[order[0]] = curr_max + 1
+    curr_sum = sum(alphas.values())
+    curr_sum_range = curr_sum - curr_max - 1
+    for i in range(curr_sum_range):
+        for j in range(curr_sum_range):
+
+
+        
 def reverse_engineer(seq):
     """
     Reverse engineer an input sequence
@@ -299,4 +320,32 @@ def reverse_engineer(seq):
     [6, 9, 11, 10]
     """
     # Your code here.
-    pass
+
+    # Extract all alphabetical characters from list, realize its order and initialize values based on order.
+    alphas = extract_alphas(seq)
+    chars = set(alphas.keys())
+
+    # Iterate through a range of values to find a sequence that makes sense.
+    # Can only accept None, or the correct combination of modulo, otherwise, update alpha values.
+    # Alpha value update order:
+    # 1. Cap lower values to their higher ups.
+    # 2. Brute force iterate through all.
+    # 3. Break when successful.
+
+    assigned_alphas = alphas
+    while True:
+        # Update alpha values here
+
+        # Check if these values work
+        out = check(alphas)
+        if type(out) != str:
+            return out
+        
+
+
+
+
+    
+
+
+    
