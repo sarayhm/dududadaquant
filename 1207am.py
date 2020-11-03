@@ -1,1 +1,0 @@
-print("xjs is fking retarded")
